@@ -1,0 +1,41 @@
+{
+  "name": "mkfolder-utils",
+  "module": "index.ts",
+  "type": "module",
+  "homepage": "https://github.com/Makefolder/react-utils",
+  "license": "Apache-2.0",
+  "version": "0.0.1",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "keywords": [
+    "react",
+    "hooks",
+    "utilities",
+    "usepolling",
+    "react-utils",
+    "custom-hooks"
+  ],
+  "repository": {
+    "url": "https://github.com/Makefolder/react-utils",
+    "type": "git"
+  },
+  "author": {
+    "name": "Makefolder",
+    "email": "artemii.fedotov@tutamail.com",
+    "url": "https://makefolder.me"
+  },
+  "scripts": {
+    "compile": "bun build index.ts --outdir dist --target node && tsc --emitDeclarationOnly"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "typescript": "^5.0.0"
+  },
+  "peerDependencies": {
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
+  }
+}
