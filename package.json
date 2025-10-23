@@ -1,12 +1,19 @@
 {
   "name": "mkfolder-utils",
-  "module": "index.ts",
   "type": "module",
   "homepage": "https://github.com/Makefolder/react-utils",
   "license": "Apache-2.0",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    }
+  },
   "files": [
     "dist"
   ],
@@ -28,14 +35,17 @@
     "url": "https://makefolder.me"
   },
   "scripts": {
-    "compile": "bun build index.ts --outdir dist --target node && tsc --emitDeclarationOnly"
+    "compile": "tsup"
   },
   "devDependencies": {
     "@types/bun": "latest",
+    "@types/react": "^19.0.0",
+    "react": "^19.1.0",
+    "tsup": "^8.5.0",
     "typescript": "^5.0.0"
   },
   "peerDependencies": {
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0"
+    "react": "^19",
+    "react-dom": "^19"
   }
 }
