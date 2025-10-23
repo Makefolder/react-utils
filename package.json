@@ -3,7 +3,7 @@
   "type": "module",
   "homepage": "https://github.com/Makefolder/react-utils",
   "license": "Apache-2.0",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
@@ -28,11 +28,13 @@
     "url": "https://makefolder.me"
   },
   "scripts": {
-    "compile": "tsup"
+    "compile": "tsup",
+    "pretty": "prettier --write ."
   },
   "devDependencies": {
     "@types/bun": "latest",
     "@types/react": "^19.0.0",
+    "prettier": "^3.6.2",
     "react": "^19.1.0",
     "tsup": "^8.5.0",
     "typescript": "^5.0.0"
