@@ -3,17 +3,10 @@
   "type": "module",
   "homepage": "https://github.com/Makefolder/react-utils",
   "license": "Apache-2.0",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
-  "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.js"
-    }
-  },
   "files": [
     "dist"
   ],
