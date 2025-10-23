@@ -19,7 +19,7 @@
     "custom-hooks"
   ],
   "repository": {
-    "url": "https://github.com/Makefolder/react-utils",
+    "url": "git+https://github.com/Makefolder/react-utils",
     "type": "git"
   },
   "author": {
