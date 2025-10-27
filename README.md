@@ -30,7 +30,7 @@ npm install mkfolder-utils
 1. `usePolling`  
    A hook that repeatedly executes a callback function at a specified interval. Useful for fetching real-time updates, monitoring changes, or refreshing data periodically.
 
-```ts
+```tsx
 import { usePolling } from 'mkfolder-utils';
 
 const fetchData = async () => {
@@ -42,13 +42,13 @@ const fetchData = async () => {
 const MyComponent = () => {
   usePolling(fetchData, { interval: 5000, enabled: true });
   return <div>Polling every 5 seconds...</div>;
-}
+};
 ```
 
 2. `useDebounce`  
    A hook that delays updating a value until after a specified period of inactivity. Ideal for optimizing performance in search inputs, API calls, or event handlers.
 
-```ts
+```tsx
 import { useState, useEffect } from 'react';
 import { useDebounce } from 'mkfolder-utils';
 
@@ -69,33 +69,64 @@ const SearchComponent = () => {
       placeholder="Search..."
     />
   );
-}
+};
 ```
 
 3. `useLocalStorage`  
    A hook that synchronizes a state variable with the browser's localStorage. Persists the value across page reloads and tabs, with automatic updates.
 
-```ts
-import { useLocalStorage, useDebounce } from 'mkfolder-utils';
-import { useState, useEffect } from 'react';
+```tsx
+import { useLocalStorage } from 'mkfolder-utils';
 
 const MyComponent = () => {
-  const [name, setName] = useLocalStorage('name', 'Alice');
-  const [input, setInput] = useState<string>(name);
-  const debouncedInput = useDebounce(input, 500);
-
-  useEffect(() => {
-    setName(debouncedInput);
-  }, [debouncedInput]);
+  //                                              key     default value
+  const [name, setName] = useLocalStorage<string>('name', 'Alice');
 
   return (
     <div>
       <input
         type="text"
-        value={input}
-        onChange={(e) => setInput(e.target.value)}
+        value={name}
+        onChange={(e) => setName(e.target.value)}
       />
       <p>Debounced value (saved to localStorage): {name}</p>
+    </div>
+  );
+};
+```
+
+4. `useRetry`
+   A hook that automatically retries failed operations with configurable backoff strategies. Perfect for handling flaky API calls or unreliable network requests. Provides status tracking for UI feedback.
+
+**Modes:**
+
+- `Mode.CONSTANT` - Fixed delay between retries (default)
+- `Mode.EXPONENTIAL` - Exponential backoff (delay doubles each time)
+
+```tsx
+import { useRetry, Mode } from 'mkfolder-utils';
+
+const MyComponent = () => {
+  const { execute, status, error } = useRetry(
+    async () => {
+      const response = await fetch('/api/data');
+      if (!response.ok) throw new Error('Failed to fetch');
+      return response.json();
+    },
+    {
+      initialInterval: 1000,      // Wait 1s between retries
+      mode: Mode.EXPONENTIAL,     // Double delay each retry (1s, 2s, 4s...)
+      maxRetries: 5               // Give up after 5 attempts
+    }
+  );
+
+  return (
+    <div>
+      <button onClick={execute} disabled={status === 'fetching'}>
+        Fetch Data
+      </button>
+      <div>{status === 'fetching' && Loading...}</div>
+      <div>{status === 'error' && Error: {error?.message}}</div>
     </div>
   );
 };
@@ -104,10 +135,6 @@ const MyComponent = () => {
 ## Contributing
 
 Contributions are welcome! Please open an issue or submit a pull request on GitHub.
-
-## Contact
-
-For questions or feedback, reach out to me: [artemii.fedotov@tutamail.com](mailto:artemii.fedotov@tutamail.com)
 
 ## License
 

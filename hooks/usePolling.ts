@@ -19,8 +19,7 @@
  */
 
 import { useEffect, useRef } from 'react';
-
-type Callback = () => void | Promise<void>;
+import type { CallbackFn } from './types';
 
 interface UsePollingOptions {
   interval: number;
@@ -30,7 +29,7 @@ interface UsePollingOptions {
 /**
  * Hook for polling a callback function at a specified interval.
  *
- * @param callback The function to be called at each interval. Can be (a)sync.
+ * @param callbackFn The function to be called at each interval. Can be (a)sync.
  * @param options.interval The polling interval in milliseconds.
  * @param options.enabled Whether polling is currently enabled.
  *
@@ -38,13 +37,13 @@ interface UsePollingOptions {
  * // Poll an API every 5 seconds
  * usePolling(fetchData, { interval: 5000, enabled: true });
  */
-export const usePolling = (callback: Callback, opts: UsePollingOptions) => {
-  const savedCallback = useRef<Callback | null>(null);
+export const usePolling = (callbackFn: CallbackFn, opts: UsePollingOptions) => {
+  const savedCallback = useRef<CallbackFn | null>(null);
   const { enabled, interval } = opts;
 
   useEffect(() => {
-    savedCallback.current = callback;
-  }, [callback]);
+    savedCallback.current = callbackFn;
+  }, [callbackFn]);
 
   useEffect(() => {
     if (!enabled || interval <= 0) return;

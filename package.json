@@ -3,7 +3,7 @@
   "type": "module",
   "homepage": "https://github.com/Makefolder/react-utils",
   "license": "Apache-2.0",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
